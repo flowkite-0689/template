@@ -1,9 +1,9 @@
 /**
  * @file myInit.h
  * @brief STM32F4xx GPIO初始化及延时函数封装库
- * @author [作者姓名]
+ * @author flowkite-0689
  * @version v1.0
- * @date [创建日期]
+ * @date 2025.11.8
  *
  * 本文件提供了STM32F4系列微控制器的GPIO初始化、延时函数等
  * 基础功能的封装，简化了硬件初始化流程。
@@ -98,3 +98,4 @@ void LED_Init(uint32_t LED_PIN, GPIO_TypeDef *GPIOx);
 void BEEP_Init(uint32_t BEEP_PIN, GPIO_TypeDef *GPIOx);
 
 #endif
+

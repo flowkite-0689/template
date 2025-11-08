@@ -1,12 +1,12 @@
 /**
  * @file myInit.c
  * @brief STM32F4xx GPIO初始化及延时函数实现
- * @author [作者姓名]
+ * @author flowkite-0689
  * @version v1.0
- * @date [创建日期]
+ * @date 2025.11.8
  */
 
-#include "myInit.h"
+#include "./myInit.h"
 
 /**
  * @brief 简单的循环延时函数
