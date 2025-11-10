@@ -98,12 +98,38 @@ void LED_Init(uint32_t LED_PIN, GPIO_TypeDef *GPIOx);
 void BEEP_Init(uint32_t BEEP_PIN, GPIO_TypeDef *GPIOx);
 
 
-//二次封装(大概......
-
+/**
+ * @brief 按键GPIO初始化二次封装函数
+ * @param x 按键编号(0-3)
+ * @note 根据编号初始化对应的按键GPIO:
+ *       - 0: 初始化KEY0 (PA0)
+ *       - 1: 初始化KEY1 (PE2)
+ *       - 2: 初始化KEY2 (PE3)
+ *       - 3: 初始化KEY3 (PE4)
+ * @note 其他值则不进行任何操作
+ */
 void KEY_Initx(uint32_t x);
 
+/**
+ * @brief LED GPIO初始化二次封装函数
+ * @param x LED编号(0-3)
+ * @note 根据编号初始化对应的LED GPIO:
+ *       - 0: 初始化LED0 (PF9)
+ *       - 1: 初始化LED1 (PF10)
+ *       - 2: 初始化LED2 (PE13)
+ *       - 3: 初始化LED3 (PE14)
+ * @note 其他值则不进行任何操作
+ */
 void LED_Initx(uint32_t x);
 
+/**
+ * @brief 蜂鸣器GPIO初始化二次封装函数
+ * @param x 蜂鸣器编号
+ * @note 当前仅支持编号0:
+ *       - 0: 初始化BEEP0 (PF8)
+ * @note 其他值则不进行任何操作
+ * @note 预留接口，可扩展支持多个蜂鸣器
+ */
 void BEEP_Initx(uint32_t x);
 
 #endif

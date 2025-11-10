@@ -132,8 +132,13 @@ void BEEP_Init(uint32_t BEEP_PIN, GPIO_TypeDef *GPIOx)
 {
   GPIO_MyInit(GPIOx, BEEP_PIN, GPIO_Mode_OUT, GPIO_Speed_50MHz, GPIO_OType_PP, GPIO_PuPd_NOPULL);
 }
-// 进一步封装
-
+/**
+ * @brief 按键GPIO初始化二次封装函数实现
+ * @param x 按键编号(0-3)
+ * @note 通过switch-case语句根据编号选择对应的按键GPIO进行初始化
+ * @note 该函数简化了按键初始化调用，只需要传入编号即可
+ * @note 不支持0-3以外的编号，传入其他值将不执行任何操作
+ */
 void KEY_Initx(uint32_t x)
 {
   switch (x)
@@ -156,6 +161,13 @@ void KEY_Initx(uint32_t x)
   }
 }
 
+/**
+ * @brief LED GPIO初始化二次封装函数实现
+ * @param x LED编号(0-3)
+ * @note 通过switch-case语句根据编号选择对应的LED GPIO进行初始化
+ * @note 该函数简化了LED初始化调用，只需要传入编号即可
+ * @note 不支持0-3以外的编号，传入其他值将不执行任何操作
+ */
 void LED_Initx(uint32_t x)
 {
   switch (x)
@@ -177,6 +189,13 @@ void LED_Initx(uint32_t x)
   }
 }
 
+/**
+ * @brief 蜂鸣器GPIO初始化二次封装函数实现
+ * @param x 蜂鸣器编号
+ * @note 通过switch-case语句根据编号选择对应的蜂鸣器GPIO进行初始化
+ * @note 当前仅支持编号0，为后续扩展预留接口
+ * @note 不支持编号0以外的值，传入其他值将不执行任何操作
+ */
 void BEEP_Initx(uint32_t x)
 {
   switch (x)
