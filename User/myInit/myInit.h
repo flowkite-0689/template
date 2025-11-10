@@ -97,5 +97,14 @@ void LED_Init(uint32_t LED_PIN, GPIO_TypeDef *GPIOx);
  */
 void BEEP_Init(uint32_t BEEP_PIN, GPIO_TypeDef *GPIOx);
 
+
+//二次封装(大概......
+
+void KEY_Initx(uint32_t x);
+
+void LED_Initx(uint32_t x);
+
+void BEEP_Initx(uint32_t x);
+
 #endif
 

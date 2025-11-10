@@ -39,7 +39,7 @@ uint8_t Key_Read(void)
     }
 
     // 4. 延时消抖，确认按键按下（防止抖动）
-    Delay_ms(20);
+    Delay_ms(15);
 
     // 5. 再次确认按键是否仍然按下
     switch(key_pressed)
@@ -54,7 +54,7 @@ uint8_t Key_Read(void)
     // 6. 确认按键
     if(current_state == 0)
     {
-        // 7. 等待按键释放（防止按键连击的关键）
+        // 7. 等待按键释放
         while(1)
         {
             switch(key_pressed)
@@ -64,7 +64,7 @@ uint8_t Key_Read(void)
                 case 2: current_state = GPIO_ReadInputDataBit(KEY2_PORT, KEY2_PIN); break;
                 case 3: current_state = GPIO_ReadInputDataBit(KEY3_PORT, KEY3_PIN); break;
             }
-            if(current_state == 1) // 检测到按键释放（高电平）
+            if(current_state == 1) // 检测到按键释放
             {
                 break; // 退出等待循环
             }
@@ -82,15 +82,15 @@ uint8_t Key_Read(void)
 /**
  * @brief 控制LED开关
  * @param led_num LED编号(0-3)
- * @param state LED状态(0-关闭, 1-开启)
+ * @param state LED状态(0-开启, 1-关闭)
  */
 void LED_Control(uint8_t led_num, uint8_t state) {
     switch(led_num) {
         case 0: // LED0
             if (state) {
-                GPIO_SetBits(LED0_PORT, LED0_PIN);      // 点亮LED
+                GPIO_SetBits(LED0_PORT, LED0_PIN);      // 关闭LED
             } else {
-                GPIO_ResetBits(LED0_PORT, LED0_PIN);    // 关闭LED
+                GPIO_ResetBits(LED0_PORT, LED0_PIN);    // 点亮LED
             }
             break;
         case 1: // LED1
@@ -125,17 +125,29 @@ int main(void) {
     static uint8_t led_state[4] = {0, 0, 0, 0}; // 每个LED的状态
     
     // 初始化硬件
-    KEY_Init(KEY0_PIN, KEY0_PORT);
-    KEY_Init(KEY1_PIN, KEY1_PORT);
-    KEY_Init(KEY2_PIN, KEY2_PORT);
-    KEY_Init(KEY3_PIN, KEY3_PORT);
+    // KEY_Init(KEY0_PIN, KEY0_PORT);
+    // KEY_Init(KEY1_PIN, KEY1_PORT);
+    // KEY_Init(KEY2_PIN, KEY2_PORT);
+    // KEY_Init(KEY3_PIN, KEY3_PORT);
+
+    KEY_Initx(0);
+    KEY_Initx(1);
+    KEY_Initx(2);
+    KEY_Initx(3);
+
     
-    LED_Init(LED0_PIN, LED0_PORT);
-    LED_Init(LED1_PIN, LED1_PORT);
-    LED_Init(LED2_PIN, LED2_PORT);
-    LED_Init(LED3_PIN, LED3_PORT);
+//    LED_Init(LED0_PIN, LED0_PORT);
+//    LED_Init(LED1_PIN, LED1_PORT);
+//    LED_Init(LED2_PIN, LED2_PORT);
+//    LED_Init(LED3_PIN, LED3_PORT);
+		
+		LED_Initx(0);
+		LED_Initx(1);
+		LED_Initx(2);
+		LED_Initx(3);
+		
     
-    // 初始化LED为关闭状态
+    // 初始化LED为开启状态
     GPIO_ResetBits(LED0_PORT, LED0_PIN);
     GPIO_ResetBits(LED1_PORT, LED1_PIN);
     GPIO_ResetBits(LED2_PORT, LED2_PIN);

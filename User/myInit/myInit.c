@@ -44,30 +44,47 @@ void Delay_ms(uint32_t ms)
  * @param GPIO_PuPd GPIO上下拉配置（上拉、下拉、无上下拉）
  * @note 函数会根据传入的GPIOx参数自动使能对应的AHB1时钟
  */
-void GPIO_MyInit(GPIO_TypeDef *GPIOx, uint32_t GPIO_Pin, GPIOMode_TypeDef GPIO_Mode, 
-                 GPIOSpeed_TypeDef GPIO_Speed, GPIOOType_TypeDef GPIO_OType, 
+void GPIO_MyInit(GPIO_TypeDef *GPIOx, uint32_t GPIO_Pin, GPIOMode_TypeDef GPIO_Mode,
+                 GPIOSpeed_TypeDef GPIO_Speed, GPIOOType_TypeDef GPIO_OType,
                  GPIOPuPd_TypeDef GPIO_PuPd)
 {
   GPIO_InitTypeDef GPIO_InitStructure;
 
   // 根据实际使用的GPIO端口使能对应时钟
-  if (GPIOx == GPIOA) {
+  if (GPIOx == GPIOA)
+  {
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
-  } else if (GPIOx == GPIOB) {
+  }
+  else if (GPIOx == GPIOB)
+  {
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
-  } else if (GPIOx == GPIOC) {
+  }
+  else if (GPIOx == GPIOC)
+  {
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
-  } else if (GPIOx == GPIOD) {
+  }
+  else if (GPIOx == GPIOD)
+  {
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
-  } else if (GPIOx == GPIOE) {
+  }
+  else if (GPIOx == GPIOE)
+  {
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOE, ENABLE);
-  } else if (GPIOx == GPIOF) {
+  }
+  else if (GPIOx == GPIOF)
+  {
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOF, ENABLE);
-  } else if (GPIOx == GPIOG) {
+  }
+  else if (GPIOx == GPIOG)
+  {
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOG, ENABLE);
-  } else if (GPIOx == GPIOH) {
+  }
+  else if (GPIOx == GPIOH)
+  {
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOH, ENABLE);
-  } else if (GPIOx == GPIOI) {
+  }
+  else if (GPIOx == GPIOI)
+  {
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOI, ENABLE);
   }
 
@@ -76,7 +93,7 @@ void GPIO_MyInit(GPIO_TypeDef *GPIOx, uint32_t GPIO_Pin, GPIOMode_TypeDef GPIO_M
   GPIO_InitStructure.GPIO_OType = GPIO_OType;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd;
-  GPIO_Init(GPIOx,&GPIO_InitStructure);
+  GPIO_Init(GPIOx, &GPIO_InitStructure);
 }
 
 /**
@@ -88,7 +105,8 @@ void GPIO_MyInit(GPIO_TypeDef *GPIOx, uint32_t GPIO_Pin, GPIOMode_TypeDef GPIO_M
  */
 void KEY_Init(uint32_t KEY_PIN, GPIO_TypeDef *GPIOx)
 {
-  GPIO_MyInit(GPIOx, KEY_PIN, GPIO_Mode_IN, GPIO_High_Speed, GPIO_OType_PP, GPIO_PuPd_NOPULL);
+  GPIO_MyInit(GPIOx, KEY_PIN, GPIO_Mode_IN, GPIO_High_Speed,
+              GPIO_OType_PP, GPIO_PuPd_NOPULL);
 }
 
 /**
@@ -113,4 +131,61 @@ void LED_Init(uint32_t LED_PIN, GPIO_TypeDef *GPIOx)
 void BEEP_Init(uint32_t BEEP_PIN, GPIO_TypeDef *GPIOx)
 {
   GPIO_MyInit(GPIOx, BEEP_PIN, GPIO_Mode_OUT, GPIO_Speed_50MHz, GPIO_OType_PP, GPIO_PuPd_NOPULL);
+}
+// 进一步封装
+
+void KEY_Initx(uint32_t x)
+{
+  switch (x)
+  {
+  case 0:
+    KEY_Init(KEY0_PIN, KEY0_PORT);
+    break;
+  case 1:
+    KEY_Init(KEY1_PIN, KEY1_PORT);
+    break;
+  case 2:
+    KEY_Init(KEY2_PIN, KEY2_PORT);
+    break;
+  case 3:
+    KEY_Init(KEY3_PIN, KEY3_PORT);
+    break;
+
+  default:
+    break;
+  }
+}
+
+void LED_Initx(uint32_t x)
+{
+  switch (x)
+  {
+  case 0:
+    LED_Init(LED0_PIN, LED0_PORT);
+    break;
+  case 1:
+    LED_Init(LED1_PIN, LED1_PORT);
+    break;
+  case 2:
+    LED_Init(LED2_PIN, LED2_PORT);
+    break;
+  case 3:
+    LED_Init(LED3_PIN, LED3_PORT);
+    break;
+  default:
+    break;
+  }
+}
+
+void BEEP_Initx(uint32_t x)
+{
+  switch (x)
+  {
+  case 0:
+    BEEP_Init(BEEP0_PIN, BEEP0_PORT);
+    break;
+
+  default:
+    break;
+  }
 }
